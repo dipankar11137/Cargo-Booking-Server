@@ -62,14 +62,14 @@ async function run() {
       res.send(users);
     });
 
-    // // all User filter by email category
-    // app.get("/user/:email", async (req, res) => {
-    //   const email = req.params.email;
-    //   const query = { email };
-    //   const cursor = userCollection.find(query);
-    //   const user = await cursor.toArray();
-    //   res.send(user);
-    // });
+    // all User filter by email category
+    app.get("/user/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email };
+      const cursor = userCollection.find(query);
+      const user = await cursor.toArray();
+      res.send(user);
+    });
 
     // // //  *********  appointments  ********//
 
