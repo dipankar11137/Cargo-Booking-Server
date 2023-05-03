@@ -54,15 +54,13 @@ async function run() {
       );
       res.send(result);
     });
-    // // get all users from db
-    // app.get("/users", async (req, res) => {
-    //   const query = {};
-
-    //   const cursor = userCollection.find(query);
-    //   const users = await cursor.toArray();
-
-    //   res.send(users);
-    // });
+    // get all users from db
+    app.get("/users", async (req, res) => {
+      const query = {};
+      const cursor = userCollection.find(query);
+      const users = await cursor.toArray();
+      res.send(users);
+    });
 
     // // all User filter by email category
     // app.get("/user/:email", async (req, res) => {
