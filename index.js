@@ -73,29 +73,29 @@ async function run() {
 
     // // //  *********  appointments  ********//
 
-    // // // get appointments to query multiple collection  and them marge data
+    // // get appointments to query multiple collection  and them marge data
 
-    // app.get("/appointments", async (req, res) => {
-    //   const date = req.query.date;
-    //   const query = {};
-    //   const options = await appointmentCollection.find(query).toArray();
-    //   const bookingQuery = { appointmentDate: date };
-    //   const alreadyBooked = await bookingCollection
-    //     .find(bookingQuery)
-    //     .toArray();
-    //   //
-    //   options.forEach((option) => {
-    //     const optionBooked = alreadyBooked.filter(
-    //       (book) => book.teacherName === option.name
-    //     );
-    //     const bookedSlots = optionBooked.map((book) => book.slot);
-    //     const remainingSlots = option.slots.filter(
-    //       (slot) => !bookedSlots.includes(slot)
-    //     );
-    //     option.slots = remainingSlots;
-    //   });
-    //   res.send(options);
-    // });
+    app.get("/appointments", async (req, res) => {
+      const date = req.query.date;
+      const query = {};
+      const options = await appointmentCollection.find(query).toArray();
+      const bookingQuery = { appointmentDate: date };
+      const alreadyBooked = await bookingCollection
+        .find(bookingQuery)
+        .toArray();
+      //
+      options.forEach((option) => {
+        const optionBooked = alreadyBooked.filter(
+          (book) => book.teacherName === option.name
+        );
+        const bookedSlots = optionBooked.map((book) => book.slot);
+        const remainingSlots = option.slots.filter(
+          (slot) => !bookedSlots.includes(slot)
+        );
+        option.slots = remainingSlots;
+      });
+      res.send(options);
+    });
 
     // Post appointments
     app.post("/appointments", async (req, res) => {
