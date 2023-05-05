@@ -24,10 +24,13 @@ async function run() {
     await client.connect();
 
     const userCollection = client.db("cargoBooking").collection("user");
-
     const appointmentCollection = client
       .db("cargoBooking")
       .collection("appointments");
+
+    // const appointmentCollection = client
+    //   .db("cargoBooking")
+    //   .collection("appointments");
     const bookingCollection = client.db("cargoBooking").collection("bookings");
 
     // // // // // // // // // // // //
@@ -102,17 +105,17 @@ async function run() {
       const result = await appointmentCollection.insertOne(appointmentsBook);
       res.send(result);
     });
-
-    // // post Booking/counseling
-    // app.post("/bookings", async (req, res) => {
-    //   const newBooking = req.body;
-    //   const result = await bookingCollection.insertOne(newBooking);
-    //   res.send(result);
-    // });
-    // // get Booking/counseling
-    // app.get("/bookings", async (req, res) => {
+    e; // post Booking/ terminal
+    app.post("/bookings", async (req, res) => {
+      const newBooking = req.body;
+      const result = await bookingCollection.insertOne(newBooking);
+      res.send(result);
+    });
+    // get Booking/counseling
+    // app.get("/appointmentss", async (req, res) => {
+    //   console.log("dado");
     //   const query = {};
-    //   const cursor = bookingCollection.find(query);
+    //   const cursor = appointmentCollection.find(query);
     //   const result = await cursor.toArray();
     //   res.send(result);
     // });
