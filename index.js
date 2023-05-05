@@ -24,12 +24,11 @@ async function run() {
     await client.connect();
 
     const userCollection = client.db("cargoBooking").collection("user");
-    // const appointmentCollection = client
-    //   .db("cargoBooking")
-    //   .collection("appointments");
-    // const bookingCollection = client
-    //   .db("cargoBooking")
-    //   .collection("bookings");
+
+    const appointmentCollection = client
+      .db("cargoBooking")
+      .collection("appointments");
+    const bookingCollection = client.db("cargoBooking").collection("bookings");
 
     // // // // // // // // // // // //
 
