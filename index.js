@@ -111,14 +111,13 @@ async function run() {
       const result = await bookingCollection.insertOne(newBooking);
       res.send(result);
     });
-    // get Booking/counseling
-    // app.get("/appointmentss", async (req, res) => {
-    //   console.log("dado");
-    //   const query = {};
-    //   const cursor = appointmentCollection.find(query);
-    //   const result = await cursor.toArray();
-    //   res.send(result);
-    // });
+    // get Booking/terminal
+    app.get("/bookings", async (req, res) => {
+      const query = {};
+      const cursor = appointmentCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
 
     // // //  Booking/counseling filter by Teacher email
     // app.get("/booking/:email", async (req, res) => {
