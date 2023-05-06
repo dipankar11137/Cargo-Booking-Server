@@ -81,14 +81,14 @@ async function run() {
       const date = req.query.date;
       const query = {};
       const options = await appointmentCollection.find(query).toArray();
-      const bookingQuery = { appointmentDate: date };
+      const bookingQuery = { date: date };
       const alreadyBooked = await bookingCollection
         .find(bookingQuery)
         .toArray();
       //
       options.forEach((option) => {
         const optionBooked = alreadyBooked.filter(
-          (book) => book.teacherName === option.name
+          (book) => book.terminalName === option.name
         );
         const bookedSlots = optionBooked.map((book) => book.slot);
         const remainingSlots = option.slots.filter(
@@ -105,7 +105,7 @@ async function run() {
       const result = await appointmentCollection.insertOne(appointmentsBook);
       res.send(result);
     });
-    e; // post Booking/ terminal
+    // post Booking/ terminal
     app.post("/bookings", async (req, res) => {
       const newBooking = req.body;
       const result = await bookingCollection.insertOne(newBooking);
@@ -114,8 +114,16 @@ async function run() {
     // get Booking/terminal
     app.get("/bookings", async (req, res) => {
       const query = {};
-      const cursor = appointmentCollection.find(query);
-      const result = await cursor.toArray();
+      const cursor = bookingCollection.find(query);
+      const users = await cursor.toArray();
+      res.send(users);
+    });
+
+    // Delete one Booking Terminal
+    app.delete("/bookings/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await bookingCollection.deleteOne(query);
       res.send(result);
     });
 
