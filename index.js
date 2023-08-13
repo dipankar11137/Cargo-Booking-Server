@@ -118,7 +118,14 @@ async function run() {
       const users = await cursor.toArray();
       res.send(users);
     });
-
+    // bookings filter by email
+    app.get('/myBookings/:email', async (req, res) => {
+   const email = req.params.email;
+   const query = { email };
+   const cursor = bookingCollection.find(query);
+   const result = await cursor.toArray();
+   res.send(result);
+ });
     // Delete one Booking Terminal
     app.delete("/bookings/:id", async (req, res) => {
       const id = req.params.id;
@@ -126,32 +133,6 @@ async function run() {
       const result = await bookingCollection.deleteOne(query);
       res.send(result);
     });
-
-    // // //  Booking/counseling filter by Teacher email
-    // app.get("/booking/:email", async (req, res) => {
-    //   const email = req.params.email;
-    //   const query = { email };
-    //   const cursor = bookingCollection.find(query);
-    //   const user = await cursor.toArray();
-    //   res.send(user);
-    // });
-
-    // //  Booking/counseling filter by Student email
-    // app.get("/studentBooking/:studentsEmail", async (req, res) => {
-    //   const studentsEmail = req.params.studentsEmail;
-    //   const query = { studentsEmail };
-    //   const cursor = bookingCollection.find(query);
-    //   const user = await cursor.toArray();
-    //   res.send(user);
-    // });
-
-    // // // Delete one Booking counseling
-    // app.delete("/bookings/:id", async (req, res) => {
-    //   const id = req.params.id;
-    //   const query = { _id: ObjectId(id) };
-    //   const result = await bookingCollection.deleteOne(query);
-    //   res.send(result);
-    // });
   } finally {
   }
 }
