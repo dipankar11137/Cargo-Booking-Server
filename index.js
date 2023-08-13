@@ -145,6 +145,24 @@ async function run() {
       );
       res.send(result);
     });
+    //  update payment buy
+    app.put('/bookingAccept/:id', async (req, res) => {
+      const id = req.params.id;
+      const updateAccept = req.body;
+      const query = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          accept: updateAccept.accept,
+        },
+      };
+      const result = await bookingCollection.updateOne(
+        query,
+        updateDoc,
+        options
+      );
+      res.send(result);
+    });
     // Delete one Booking Terminal
     app.delete('/bookings/:id', async (req, res) => {
       const id = req.params.id;
