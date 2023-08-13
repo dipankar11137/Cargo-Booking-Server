@@ -159,6 +159,13 @@ async function run() {
       const result = await contactCollection.insertOne(newBooking);
       res.send(result);
     });
+    // get contact
+    app.get('/contact', async (req, res) => {
+      const query = {};
+      const cursor = contactCollection.find(query);
+      const users = await cursor.toArray();
+      res.send(users);
+    });
   } finally {
   }
 }
